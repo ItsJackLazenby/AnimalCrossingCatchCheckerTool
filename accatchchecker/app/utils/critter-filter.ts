@@ -1,7 +1,7 @@
 import { ALL_DATA } from "../data";
 import { Critter } from "../interfaces/critter";
 
-export function filterAllCritters(date: Date, hemisphere: "NH" | "SH" = "NH") {
+export function filterAllCritters(date: Date, hemisphere: string) {
   return {
     insects: filterCategory(ALL_DATA.insects, date, hemisphere),
     fish: filterCategory(ALL_DATA.fish, date, hemisphere),
@@ -9,7 +9,7 @@ export function filterAllCritters(date: Date, hemisphere: "NH" | "SH" = "NH") {
   };
 }
 
-function filterCategory(critters: Critter[], date: Date, hemisphere: "NH" | "SH") {
+function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
   const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const month = monthNames[date.getMonth()];
 
