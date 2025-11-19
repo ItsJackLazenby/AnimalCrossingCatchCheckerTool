@@ -9,7 +9,7 @@ export function filterAllCritters(date: Date, hemisphere: string) {
   };
 }
 
-function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
+export function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
   const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const month = monthNames[date.getMonth()];
 
@@ -21,15 +21,14 @@ function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
     if (!availability || availability === "NA") return false;
     if (availability.toLowerCase() === "all day") return true;
 
-    // Split multiple time ranges separated by commas
     const ranges = availability.split(",").map((r: string) => r.trim());
 
     for (const range of ranges) {
       const [startStr, endStr] = range.split("–").map((s: string) => s.trim());
       if (!startStr || !endStr) continue;
 
-      const start = to24(startStr);
-      const end = to24(endStr);
+      const start = to24HourFormat(startStr);
+      const end = to24HourFormat(endStr);
 
       // Normal range (same day)
       if (start < end) {
@@ -44,7 +43,7 @@ function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
   });
 }
 
-function to24(timeStr: string): number {
+export function to24HourFormat(timeStr: string): number {
   const [timePart, period] = timeStr.split(" ").map(s => s.trim().toLowerCase());
   const [hourStr, minuteStr] = timePart.split(":");
   let hour = parseInt(hourStr, 10);
