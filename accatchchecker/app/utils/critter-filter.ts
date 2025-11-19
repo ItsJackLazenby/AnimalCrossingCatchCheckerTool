@@ -44,7 +44,6 @@ function filterCategory(critters: Critter[], date: Date, hemisphere: string) {
   });
 }
 
-/** Convert 12h time string like "8 AM" or "8:30 PM" to decimal 24h hour */
 function to24(timeStr: string): number {
   const [timePart, period] = timeStr.split(" ").map(s => s.trim().toLowerCase());
   const [hourStr, minuteStr] = timePart.split(":");

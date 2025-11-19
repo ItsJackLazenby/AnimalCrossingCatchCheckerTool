@@ -1,4 +1,4 @@
 export enum Hemispheres {
-    NORTHERN_HEMISPHERE = 'NA',
-    SOUTHERN_HEMISPHERE = 'SA'
+    NORTHERN_HEMISPHERE = 'NH',
+    SOUTHERN_HEMISPHERE = 'SH'
 }

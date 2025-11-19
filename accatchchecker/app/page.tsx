@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import { filterAllCritters } from "./utils/critter-filter";
 import {Critter} from "@/app/interfaces/critter";
+import {Hemispheres} from "@/app/constants/hemispheres";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [hemisphere, setHemisphere] = useState("NH");
+  const [resultsHemisphere, setResultsHemisphere] = useState("NH");
   const [results, setResults] = useState<{
     fish: Critter[];
     insects: Critter[];
@@ -26,6 +28,7 @@ export default function Home() {
     const date = new Date(selectedDate);
     const filtered = filterAllCritters(date, hemisphere);
     setResults(filtered);
+    setResultsHemisphere(hemisphere);
   }
 
   return (
@@ -67,9 +70,9 @@ export default function Home() {
 
         {results && (
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-            <CategoryColumn title="🐟 Fish" items={results.fish} />
-            <CategoryColumn title="🐛 Insects" items={results.insects} />
-            <CategoryColumn title="🦀 Sea Creatures" items={results.seaCreatures} />
+            <CategoryColumn title="🐟 Fish" items={results.fish} hemisphere={resultsHemisphere} />
+            <CategoryColumn title="🐛 Insects" items={results.insects} hemisphere={resultsHemisphere} />
+            <CategoryColumn title="🦀 Sea Creatures" items={results.seaCreatures} hemisphere={resultsHemisphere} />
           </div>
         )}
       </main>
@@ -77,9 +80,8 @@ export default function Home() {
   );
 }
 
-function CategoryColumn({ title, items }: { title: string; items: any[] }) {
-  // Assign background color based on category
-  const getCardColor = () => {
+function CategoryColumn({ title, items, hemisphere }: { title: string; items: Critter[], hemisphere: string }) {
+   const getCardColor = () => {
     if (title.includes("Fish")) return "bg-blue-100 dark:bg-blue-900";
     if (title.includes("Insects")) return "bg-green-100 dark:bg-green-900";
     if (title.includes("Sea Creatures")) return "bg-pink-100 dark:bg-pink-900";
@@ -103,7 +105,7 @@ function CategoryColumn({ title, items }: { title: string; items: any[] }) {
             ];
             const now = new Date();
             const month = monthNames[now.getMonth()];
-            const hours = c[`NH ${month}`];
+            const hours = c[`${hemisphere} ${month}`];
 
             return (
                 <div
