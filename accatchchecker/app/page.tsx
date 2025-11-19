@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { filterAllCritters } from "./utils/critter-filter";
 import {Critter} from "@/app/interfaces/critter";
-import {Hemispheres} from "@/app/constants/hemispheres";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [resultsDate, setResultsDate] = useState<Date>(new Date());
   const [hemisphere, setHemisphere] = useState("NH");
   const [resultsHemisphere, setResultsHemisphere] = useState("NH");
   const [results, setResults] = useState<{
@@ -29,6 +29,7 @@ export default function Home() {
     const filtered = filterAllCritters(date, hemisphere);
     setResults(filtered);
     setResultsHemisphere(hemisphere);
+    setResultsDate(date);
   }
 
   return (
@@ -70,9 +71,9 @@ export default function Home() {
 
         {results && (
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
-            <CategoryColumn title="🐟 Fish" items={results.fish} hemisphere={resultsHemisphere} />
-            <CategoryColumn title="🐛 Insects" items={results.insects} hemisphere={resultsHemisphere} />
-            <CategoryColumn title="🦀 Sea Creatures" items={results.seaCreatures} hemisphere={resultsHemisphere} />
+            <CategoryColumn title="🐟 Fish" items={results.fish} hemisphere={resultsHemisphere} date={resultsDate} />
+            <CategoryColumn title="🐛 Insects" items={results.insects} hemisphere={resultsHemisphere} date={resultsDate} />
+            <CategoryColumn title="🦀 Sea Creatures" items={results.seaCreatures} hemisphere={resultsHemisphere} date={resultsDate} />
           </div>
         )}
       </main>
@@ -80,7 +81,7 @@ export default function Home() {
   );
 }
 
-function CategoryColumn({ title, items, hemisphere }: { title: string; items: Critter[], hemisphere: string }) {
+function CategoryColumn({ title, items, hemisphere, date }: { title: string; items: Critter[], hemisphere: string, date:Date }) {
    const getCardColor = () => {
     if (title.includes("Fish")) return "bg-blue-100 dark:bg-blue-900";
     if (title.includes("Insects")) return "bg-green-100 dark:bg-green-900";
@@ -103,8 +104,7 @@ function CategoryColumn({ title, items, hemisphere }: { title: string; items: Cr
               "Jan","Feb","Mar","Apr","May","Jun",
               "Jul","Aug","Sep","Oct","Nov","Dec"
             ];
-            const now = new Date();
-            const month = monthNames[now.getMonth()];
+            const month = monthNames[date.getMonth()];
             const hours = c[`${hemisphere} ${month}`];
 
             return (
