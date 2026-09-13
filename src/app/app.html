@@ -74,14 +74,6 @@
 
   <nav class="bottom-nav">
     <button 
-      (click)="setTab('fish')"
-      [class.active]="activeTab() === 'fish'"
-      class="nav-item">
-      <span class="nav-icon">🐟</span>
-      <span>Fish</span>
-    </button>
-
-    <button 
       (click)="setTab('bugs')"
       [class.active]="activeTab() === 'bugs'"
       class="nav-item">
@@ -90,11 +82,11 @@
     </button>
 
     <button 
-      (click)="setTab('sea')"
-      [class.active]="activeTab() === 'sea'"
+      (click)="setTab('fish')"
+      [class.active]="activeTab() === 'fish'"
       class="nav-item">
-      <span class="nav-icon">🦪</span>
-      <span>Sea Creatures</span>
+      <span class="nav-icon">🐟</span>
+      <span>Fish</span>
     </button>
 
     <button 
@@ -103,6 +95,14 @@
       class="nav-item">
       <span class="nav-icon">🦴</span>
       <span>Fossils</span>
+    </button>
+
+    <button 
+      (click)="setTab('sea')"
+      [class.active]="activeTab() === 'sea'"
+      class="nav-item">
+      <span class="nav-icon">🦪</span>
+      <span>Sea Creatures</span>
     </button>
   </nav>
 
