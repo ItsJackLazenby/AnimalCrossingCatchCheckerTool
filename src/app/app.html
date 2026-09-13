@@ -1,0 +1,111 @@
+@if (isLoading()) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading Critterpedia...</p>
+  </div>
+} @else {
+  <div class="app-container">
+
+  <header class="app-header">
+    <div class="header-top">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🍃</span>
+        <h1 class="text-xl font-bold">Critterpedia</h1>
+      </div>
+      <div class="ac-badge">
+        {{ tabCaughtCount() }} / {{ tabTotalCount() }}
+      </div>
+    </div>
+
+   
+    <input 
+      #search
+      type="text" 
+      placeholder="Search {{ activeTab() }}..." 
+      (input)="updateSearch(search.value)"
+      class="search-input"
+    />
+
+
+    <div class="progress-track">
+      <div 
+        class="progress-fill"
+        [style.width.%]="(tabCaughtCount() / (tabTotalCount() || 1)) * 100">
+      </div>
+    </div>
+  </header>
+
+  <main class="item-list">
+    @for (item of filteredItems(); track item.id) {
+      <div 
+        (click)="toggleCaught(item)"
+        [class.caught]="item.caught"
+        class="item-card">
+        
+        <div>
+          <div class="font-bold text-base" [style.text-decoration]="item.caught ? 'line-through' : 'none'">
+            {{ item.name }}
+          </div>
+          <div class="item-details">
+            <span class="bells-tag">
+              🔔 {{ item.price | number }}
+            </span>
+            @if (item.location) {
+              <span>📍 {{ item.location }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="text-xl">
+          @if (item.caught) {
+            <span>🍃</span>
+          } @else {
+            <span class="opacity-30">⚪</span>
+          }
+        </div>
+      </div>
+    } @empty {
+      <div class="text-center py-10 text-[var(--stevo-ac-brown-medium)]">
+        <p class="text-3xl">🍃</p>
+        <p class="font-bold">No {{ activeTab() }} found!</p>
+      </div>
+    }
+  </main>
+
+  <nav class="bottom-nav">
+    <button 
+      (click)="setTab('fish')"
+      [class.active]="activeTab() === 'fish'"
+      class="nav-item">
+      <span class="nav-icon">🐟</span>
+      <span>Fish</span>
+    </button>
+
+    <button 
+      (click)="setTab('bugs')"
+      [class.active]="activeTab() === 'bugs'"
+      class="nav-item">
+      <span class="nav-icon">🦋</span>
+      <span>Bugs</span>
+    </button>
+
+    <button 
+      (click)="setTab('sea')"
+      [class.active]="activeTab() === 'sea'"
+      class="nav-item">
+      <span class="nav-icon">🦪</span>
+      <span>Sea Creatures</span>
+    </button>
+
+    <button 
+      (click)="setTab('fossils')"
+      [class.active]="activeTab() === 'fossils'"
+      class="nav-item">
+      <span class="nav-icon">🦴</span>
+      <span>Fossils</span>
+    </button>
+  </nav>
+
+</div>
+}
+

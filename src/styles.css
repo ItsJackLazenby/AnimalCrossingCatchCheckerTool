@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+:root {
+  /* General Stylin' and Profilin' */
+  --stevo-ac-bg-primary: #f7f4e9;     
+  --stevo-ac-surface-card: #fffef8;     
+  --stevo-ac-accent-green: #72db85;    
+  --stevo-ac-brown-dark: #594939;      
+  --stevo-ac-brown-medium: #8c7a65;
+
+  /* Navigation & Container Surfacing */
+  --stevo-ac-nav-bg: #f0e6d2;
+  --stevo-ac-nav-border: #d8c8af;
+  --stevo-ac-nav-active: #e3d7bd;
+  --stevo-ac-header-border: #e0d4ba;
+  --stevo-ac-input-border: #d0c2a5;
+  --stevo-ac-progress-track: #e2d8c2;
+
+  /* Card States (Caught vs Uncaught) */
+  --stevo-ac-card-border: #e2d2b4;
+  --stevo-ac-caught-bg: #eef8eb;
+  --stevo-ac-caught-border: #b6e2af;
+
+  /* Accents & Badges */
+  --stevo-ac-badge-bg: #e5f2cf;
+  --stevo-ac-badge-text: #3b6d28;
+  --stevo-ac-badge-border: #b8dc82;
+  --stevo-ac-bells-bg: #fcebb6;
+  --stevo-ac-bells-text: #856100;
+}
+
+body {
+  font-family: 'Fredoka', cursive, sans-serif;
+  background-color: var(--stevo-ac-bg-primary);
+  color: var(--stevo-ac-brown-dark);
+  margin: 0;
+  padding: 0;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 16px;
+  color: #555;
+  font-family: inherit;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #2ba882;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 70px;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(247, 244, 233, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--stevo-ac-header-border);
+  padding: 12px 16px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ac-badge {
+  background-color: var(--stevo-ac-badge-bg);
+  color: var(--stevo-ac-badge-text);
+  border: 2px solid var(--stevo-ac-badge-border);
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--stevo-ac-surface-card);
+  border: 2px solid var(--stevo-ac-input-border);
+  color: var(--stevo-ac-brown-dark);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--stevo-ac-progress-track);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--stevo-ac-accent-green);
+  transition: width 0.3s ease;
+}
+
+.item-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-card {
+  background-color: var(--stevo-ac-surface-card);
+  border: 2px solid var(--stevo-ac-card-border);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.item-card.caught {
+  background-color: var(--stevo-ac-caught-bg);
+  border-color: var(--stevo-ac-caught-border);
+}
+
+.bells-tag {
+  background-color: var(--stevo-ac-bells-bg);
+  color: var(--stevo-ac-bells-text);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.item-details {
+  font-size: 0.75rem;
+  color: var(--stevo-ac-brown-medium);
+  margin-top: 4px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 50;
+  background-color: var(--stevo-ac-nav-bg);
+  border-top: 2px solid var(--stevo-ac-nav-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--stevo-ac-brown-medium);
+  font-weight: 700;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nav-item.active {
+  color: var(--stevo-ac-badge-text);
+  background-color: var(--stevo-ac-nav-active);
+  border-top: 3px solid var(--stevo-ac-accent-green);
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
