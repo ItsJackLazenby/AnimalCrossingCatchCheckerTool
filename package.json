@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@analogjs/vitest-angular": "2.7.2",
-    "@angular/build": "22.1.8",
+    "@angular/build": "22.2.2",
     "@angular/cli": "22.1.8",
     "@angular/compiler-cli": "22.1.6",
     "@capacitor/android": "8.5.2",
