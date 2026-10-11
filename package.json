@@ -34,7 +34,7 @@
     "@capacitor/cli": "8.5.2",
     "@capacitor/ios": "8.5.2",
     "@tailwindcss/vite": "4.3.3",
-    "daisyui": "5.7.37",
+    "daisyui": "5.7.47",
     "jsdom": "30.0.1",
     "prettier": "3.9.6",
     "tailwindcss": "4.3.3",
