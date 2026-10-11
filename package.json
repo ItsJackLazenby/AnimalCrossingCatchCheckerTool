@@ -17,7 +17,7 @@
     "@angular/core": "22.1.6",
     "@angular/forms": "22.1.6",
     "@angular/platform-browser": "22.1.6",
-    "@angular/router": "22.1.6",
+    "@angular/router": "22.2.1",
     "@capacitor/core": "8.5.2",
     "@capacitor/haptics": "8.0.2",
     "@electric-sql/pglite": "0.5.8",
